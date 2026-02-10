@@ -2,6 +2,7 @@ export default function Home() {
   return (
     <div>
       <Toolbar/>
+      <HeroImage/>
     </div>
   );
 }
@@ -26,7 +27,9 @@ function Toolbar() {
 }
 
 function HeroImage() {
-  return <div className="bg-[url(/demo.png)] max-w-full h-screen bg-auto">
-    asd
+  return <div className="bg-[url(/hero.png)] bg-no-repeat bg-cover bg-center gap-8 max-w-full h-[80vh] flex flex-col items-center justify-center text-black text-shadow-lg text-shadow-zinc-500 font-black">
+    <div className="text-9xl text-center">Amial</div>
+    <div className="text-5xl">Meet new people in your free time</div>
+    <button className="mt-3 text-3xl px-6 py-2 bg-zinc-200 rounded-sm dark:bg-zinc-800 dark:text-white">Join the Waitlist</button>
   </div>
 }
