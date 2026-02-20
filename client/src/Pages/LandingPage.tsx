@@ -8,7 +8,6 @@ export default function LandingPage() {
 }
 
 
-
 function Toolbar() {
   const links = [["Solutions", "#"], ["Community", "#"], ["Resources", "#"], ["Contact", "#"], ["Sign in", "/login"], ["Register", "/register"]]
   return <div className="max-w-full flex [&>div]:p-5">
