@@ -7,7 +7,7 @@
 export default function LoginPage() {
     return <div className="bg-[url(/hero.png)] min-h-screen bg-no-repeat bg-cover bg-center gap-8 max-w-full h-[80vh] text-black text-shadow-lg text-shadow-zinc-500 font-black">
 
-        <h1 className=" text-7xl underline font-bold my-10"> Amial </h1>
+        <h1 className=" text-7xl underline font-bold my-10"> Amial</h1>
         
         <div className="px-50 text-3xl mt-30 font-bold"> Login </div>
         <div className="px-50 text-1xl mt-3"> Username </div>
