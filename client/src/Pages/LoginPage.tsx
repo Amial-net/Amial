@@ -2,7 +2,6 @@
     - Logo/Background Image (waiting for group leader)
     - Button to actually show the password
     - Button to show something when button is pressed
-    - Maybe fix minimizng / maximizng
 */}
 
 import {useState} from "react";
