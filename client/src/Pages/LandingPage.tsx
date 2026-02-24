@@ -9,12 +9,11 @@ export default function LandingPage() {
 
 function Toolbar() {
   const links = [
-    ["Solutions", "#"],
-    ["Community", "#"],
+    ["Home", "#"],
     ["Resources", "#"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
-    ["Register", "/register"],
+    ["Mission", "/mission"],
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5">
