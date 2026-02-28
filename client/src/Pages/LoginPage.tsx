@@ -1,6 +1,8 @@
 {/* To do:
     - Logo/Background Image (waiting for group leader)
     - Button to actually show the password
+    - Might have to find a icon picture for show password button
+    - Make it look good on mobile
 */}
 
 import {useState} from "react";
@@ -36,12 +38,12 @@ function Login(){
 
             <div className="px-50 text-1xl mt-5"> Password </div>
             <input type="password" placeholder="Password" value={password} onChange = {(e) => setPassword(e.target.value)} className="mx-50 text-1xl mt-3"></input>
+            <button className="px-5 py-5 bg-black hover:bg-slate-600 active:bg-blue-600"
+                onClick={() => console.log(password)}>
+            </button>
 
-            
-
-            <button className="mt-10 mx-50 px-40 py-2.5 bg-black text-white hover:bg-slate-600 flex items-center active:bg-blue-600"
-                onClick={() => enterButton(email, password)}
-            >
+            <button className="mt-10 mx-50 px-47.5 py-2.5 bg-black text-white hover:bg-slate-600 flex items-center active:bg-blue-600"
+                onClick={() => enterButton(email, password)} >
                 Enter
             </button>
         </div>
