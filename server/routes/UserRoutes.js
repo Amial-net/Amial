@@ -73,6 +73,7 @@ router.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
 
+    //stores user in a session (For cookie session later to identify who is in the current session to stay logged in)
     req.session.user = {
       id: newUser._id,
       email: newUser.email,
@@ -93,6 +94,64 @@ router.post("/signup", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Server error during signup.",
+    });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    let { identifier, password } = req.body;
+
+    identifier = identifier?.trim().toLowerCase();
+    password = password?.trim();
+
+    if (!identifier || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Identifier and password are required.",
+      });
+    }
+
+    const user = await User.findOne({
+      $or: [{ email: identifier }, { username: identifier }],
+    }).select("+password");
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials.",
+      });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials.",
+      });
+    }
+
+    req.session.user = {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+    };
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful.",
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+      },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error during login.",
     });
   }
 });
