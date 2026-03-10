@@ -1,12 +1,51 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
 const isRpiEmail = (email) => {
   return /^[A-Za-z0-9._%+-]+@rpi\.edu$/i.test(email);
 };
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+async function sendVerificationEmail(email, token) {
+  const verificationLink = `http://localhost:3000/auth/verify-email/${token}`;
+
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Verify your RPI email",
+    html: `
+      <h2>Verify your email</h2>
+      <p>Click the link below to verify your email for this session:</p>
+      <a href="${verificationLink}">${verificationLink}</a>
+      <p>This link expires in 15 minutes.</p>
+    `,
+  });
+}
+
+const setVerificationTokenOnUser = async (user) => {
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+  user.emailVerificationToken = hashedToken;
+  user.emailVerificationExpires = new Date(Date.now() + 15 * 60 * 1000); // 15 min
+
+  await user.save();
+
+  return rawToken;
+};
+
+
 
 // SIGN UP
 router.post("/signup", async (req, res) => {
@@ -79,10 +118,16 @@ router.post("/signup", async (req, res) => {
       email: newUser.email,
       username: newUser.username,
     };
+        
+    req.session.emailVerified = false;
+
+    const rawToken = await setVerificationTokenOnUser(newUser);
+    await sendVerificationEmail(newUser.email, rawToken);
 
     return res.status(201).json({
       success: true,
       message: "Account created successfully.",
+      requiresEmailVerification: true,
       user: {
         id: newUser._id,
         email: newUser.email,
