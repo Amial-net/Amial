@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const { connectDB } = require("./scripts/seed")
+const { connectDB } = require("./scripts/seed");
 
-const app = express()
+const app = express();
 port = 3000;
 
 
@@ -19,6 +19,11 @@ connectDB()
     .catch((err) =>{
         console.error("Database connection failed. Server not started.", err);
     })
+
+
+    
+
+
 
     
 
