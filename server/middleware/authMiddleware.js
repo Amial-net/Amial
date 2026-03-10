@@ -1,4 +1,6 @@
-function requireVerifiedEmail(req, res, next) {
+//route for protection when not logged in 
+//I.E: trying to access /home when your not logged in this will prevent it.
+function ensureAuthenticated(req, res, next) {
   if (!req.session.user) {
     return res.status(401).json({
       success: false,
@@ -16,4 +18,4 @@ function requireVerifiedEmail(req, res, next) {
   next();
 }
 
-module.exports = requireVerifiedEmail;
+module.exports = { ensureAuthenticated };

@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 const router = express.Router();
 
@@ -183,9 +184,15 @@ router.post("/login", async (req, res) => {
       username: user.username,
     };
 
+    req.session.emailVerified = false;
+
+    const rawToken = await setVerificationTokenOnUser(user);
+    await sendVerificationEmail(user.email, rawToken);
+
     return res.status(200).json({
       success: true,
       message: "Login successful.",
+      requiresEmailVerification: true,
       user: {
         id: user._id,
         email: user.email,
@@ -197,6 +204,49 @@ router.post("/login", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Server error during login.",
+    });
+  }
+});
+
+router.get("/verify-email/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await User.findOne({
+      emailVerificationToken: hashedToken,
+      emailVerificationExpires: { $gt: new Date() },
+    }).select("+emailVerificationToken +emailVerificationExpires");
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification token.",
+      });
+    }
+
+    req.session.user = {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+    };
+
+    req.session.emailVerified = true;
+
+    user.emailVerificationToken = null;
+    user.emailVerificationExpires = null;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Email verified successfully for this session.",
+      user: req.session.user,
+    });
+  } catch (err) {
+    console.error("Verify email error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error during email verification.",
     });
   }
 });
