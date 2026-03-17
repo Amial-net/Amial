@@ -3,6 +3,7 @@ import LandingPage from "../Pages/LandingPage";
 import LoginPage from "../Pages/LoginPage";
 import MessagePage from "../Pages/MessagePage";
 import MissionPage from "../Pages/MissionPage"
+import SignupPage from "../Pages/SignupPage"
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
       {
         path : "mission",
         element: <MissionPage />,
+      },
+      {
+        path : "signup",
+        element: <SignupPage />,
       },
     ],
   },
