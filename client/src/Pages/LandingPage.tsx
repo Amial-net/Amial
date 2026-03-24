@@ -10,7 +10,7 @@ export default function LandingPage() {
 function Toolbar() {
   const links = [
     ["Home", "#"],
-    ["Explore", "/explore"],
+    ["Resources", "#"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
     ["Mission", "/mission"],
