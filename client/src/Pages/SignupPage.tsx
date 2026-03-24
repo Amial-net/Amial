@@ -1,6 +1,3 @@
-/*
-display input error
-*/
 import {useState} from "react";
 import {Link} from "react-router"
 
@@ -23,14 +20,26 @@ function Signup(){
     const [display, setDisplay] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    function checkingValid(){
+        if(!email.includes("@rpi.edu")){
+            setError("Invaild email. Must use school email.");
+            return;
+        }
+
+        setError("");
+        enterButton(email, password);
+    }
 
     return(
         <div className="bg-black min-h-screen bg-no-repeat bg-cover bg-center flex flex-col items-center gap-1 align-center content-center justify-center">
-            <h1 className="text-7xl underline font-bold text-white "> Amial </h1>
+            <h1 className="text-7xl underline font-bold text-white flex flex-col items-center gap-1 align-center"> Amial </h1>
 
-            <div className="bg-white h-[90%] min-h-[40vh] max-w-xs w-full border rounded-[10%] flex flex-col items-center gap-1 align-center content-center justify-center">
+            <div className="bg-white h-[90%] min-h-[40vh] min-w-[70vh] max-w-xs w-full border rounded-[10%] flex flex-col items-center gap-1 align-center content-center justify-center">
                 <div className="text-center text-3xl font-bold"> Sign Up </div>
                 
+                {error && <p className="text-red-500">{error}</p>}
                 <div className="text-1xl text-left w-full pl-[5%]"> RPI Email</div>
                 <div className="text-left w-full pl-[5%]">
                     <input type="email" placeholder={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} className="text-1xl"></input>
@@ -52,14 +61,20 @@ function Signup(){
                 </div>
 
                 <button className="px-[40%] bg-black text-white hover:bg-slate-600 flex items-center active:bg-blue-600"
-                    onClick={() => enterButton(email, password)}>
+                    onClick={() => checkingValid()}>
                     Enter
                 </button>
+
+                <p className="">
+                        Have an account?
+                    </p>   
+
+                    <Link to="/login" className="">
+                        <span>Login</span>
+                        <span className="text-blue-600"> here</span> 
+                    </Link>
+
             </div>
-
-
-
-
         </div>
     )
 }
