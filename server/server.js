@@ -19,8 +19,3 @@ connectDB()
     .catch((err) =>{
         console.error("Database connection failed. Server not started.", err);
     })
-
-    
-
-
-
