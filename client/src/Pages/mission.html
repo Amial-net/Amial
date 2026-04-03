@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amial Mission</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #f5f7fb, #e9eef8);
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 20px;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 20px;
+      padding: 48px 32px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #4b5563;
+    }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      color: #111827;
+    }
+
+    .problem-list,
+    .roles-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .problem-list li,
+    .roles-list li {
+      background: #f8fafc;
+      border-left: 5px solid #6366f1;
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+
+    .mission-box {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.25);
+      margin-bottom: 24px;
+    }
+
+    .mission-box h2 {
+      color: white;
+      margin-bottom: 14px;
+    }
+
+    .mission-box p {
+      font-size: 1.15rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px 12px;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      text-align: center;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 14px 24px;
+      background: #111827;
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    .cta a:hover {
+      background: #1f2937;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="badge">Amial</div>
+      <h1>Be more connected, one activity at a time.</h1>
+      <p>
+        Amial is built to make it easy and frictionless for people to connect in real life
+        through everyday activities.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>The problem</h2>
+      <p>
+        You see people out doing things and think, “I want to do something today too,” but then
+        the idea dies before it even starts. Reaching out feels awkward, uncertain, and harder
+        than it should be.
+      </p>
+      <ul class="problem-list">
+        <li>I do not want it to be awkward.</li>
+        <li>I do not know if we are compatible.</li>
+        <li>I do not know if they even want to be approached.</li>
+        <li>I do not know how to reach out.</li>
+        <li>I do not want to be rejected.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Why Amial?</h2>
+      <p>
+        Even though we are more connected than ever online, many people still feel lonely and
+        disconnected in real life. Most platforms push users toward dating apps or events planned
+        far ahead. There is still no simple, natural way to go from “I want to do something” to
+        “I am doing something with someone today.”
+      </p>
+    </section>
+
+    <section class="mission-box">
+      <h2>Our mission</h2>
+      <p>
+        To make it easy for people to do daily activities together and create real connections
+        through shared experiences.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>How it works</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Post an activity</h3>
+          <p>
+            Share something you want to do today or this week, like studying, going to the gym,
+            grabbing food, or anything else.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Find people who opted in</h3>
+          <p>
+            Instead of guessing who might be interested, you connect with people who already want
+            to join.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Build real connection</h3>
+          <p>
+            Relationships grow more naturally when they start with shared experiences and genuine
+            interest.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Why join the team?</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Build from scratch</h3>
+          <p>
+            Help shape Amial from the ground up and be part of the full product journey.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Gain real experience</h3>
+          <p>
+            Work through the design and development process of a real web app by the end of the
+            semester.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Strengthen your resume</h3>
+          <p>
+            Show that you contributed to building a meaningful product with real users and a real
+            mission.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <h2>Who we are looking for</h2>
+      <ul class="roles-list">
+        <li>Frontend developers</li>
+        <li>Backend developers</li>
+        <li>Designers</li>
+      </ul>
+      <a href="#">Join Amial</a>
+    </section>
+
+    <div class="footer">
+      Built from your mission draft for Amial. Ready to customize with team member names, photos,
+      or your logo.
+    </div>
+  </div>
+</body>
+</html>
