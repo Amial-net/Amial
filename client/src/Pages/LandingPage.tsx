@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 export default function LandingPage() {
   return (
     <div>
@@ -9,14 +11,14 @@ export default function LandingPage() {
 
 function Toolbar() {
   const links = [
-    ["Home", "#"],
+    ["Home", "/"],
     ["Resources", "#"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
     ["Mission", "/mission"],
   ];
   return (
-    <div className="max-w-full flex [&>div]:p-5">
+    <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
       <div>Amial</div>
       <div className="flex-auto" />
       {links.map((i) => {
