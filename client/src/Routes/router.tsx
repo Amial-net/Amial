@@ -2,6 +2,8 @@ import App from "../App";
 import LandingPage from "../Pages/LandingPage";
 import LoginPage from "../Pages/LoginPage";
 import MessagePage from "../Pages/MessagePage";
+
+import ActivityPage from "../Pages/ActivitiesPage";
 import MissionPage from "../Pages/MissionPage"
 import SignupPage from "../Pages/SignupPage"
 
@@ -23,12 +25,16 @@ const routes = [
         element: <MessagePage />,
       },
       {
-        path : "mission",
+        path: "mission",
         element: <MissionPage />,
       },
       {
-        path : "signup",
-        element: <SignupPage />,
+        path: "activities",
+        element: <ActivityPage />,
+       
+      },
+      { path : "signup",
+        element: <SignupPage />
       },
     ],
   },
