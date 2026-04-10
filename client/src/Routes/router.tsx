@@ -4,8 +4,9 @@ import LoginPage from "../Pages/LoginPage";
 import MessagePage from "../Pages/MessagePage";
 
 import ActivityPage from "../Pages/ActivitiesPage";
-import MissionPage from "../Pages/MissionPage"
-import SignupPage from "../Pages/SignupPage"
+import MissionPage from "../Pages/MissionPage";
+import SignupPage from "../Pages/SignupPage";
+import PlaybackPage from "../Pages/PlaybackPage";
 
 const routes = [
   {
@@ -36,6 +37,10 @@ const routes = [
       { path : "signup",
         element: <SignupPage />
       },
+      {
+        path: "playback",
+        element: <PlaybackPage/>
+      }
     ],
   },
 ];
