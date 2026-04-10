@@ -13,10 +13,11 @@ export default function LoginPage() {
 function Toolbar() {
   const links = [
     ["Home", "/"],
-    ["Resources", "#"],
+    ["Activity", "/activities"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
     ["Mission", "/mission"],
+    ["Playback", "/playback"],
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
@@ -47,7 +48,7 @@ function Login(){
     return (
         <div className="bg-black min-h-screen bg-no-repeat bg-cover bg-center">
             <h1 className="text-7xl underline font-bold text-white flex flex-col items-center gap-1 align-center "> Amial </h1>
-            <div className="min-h-screen flex flex-col justify-center items-center">
+            <div className="flex justify-center items-center min-h-screen">
                 <div className="bg-white h-[90%] min-h-[40vh] min-w-[70vh] max-w-xs w-full border rounded-[10%] flex flex-col items-center gap-1 align-center content-center justify-center">
 
                     <div className="text-center text-3xl font-bold"> Login </div>

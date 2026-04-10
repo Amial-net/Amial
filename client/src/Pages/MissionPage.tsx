@@ -11,10 +11,11 @@ export default function MissionPage(){
 function Toolbar() {
   const links = [
     ["Home", "/"],
-    ["Resources", ""],
+    ["Activity", "/activities"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
     ["Mission", "/mission"],
+    ["Playback", "/playback"],
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
@@ -34,9 +35,31 @@ function Toolbar() {
 function Mission(){
     return(
         <div>
-            <h3 className="py-10 text-black flex items-center justify-center max-w-4xl mx-auto"> AMIAL is .... </h3>
-            <div className ="text-3xl bg-red-300 h-[6vh] w-full flex items-center justify-center"> About AMIAL </div>
-            <div className ="mx-30"> example paragraph </div>
+          <h1 className="py-10 text-black flex items-center justify-center max-w-4xl mx-auto text-[100%]"> Amial - Let's do life together </h1>
+          <div className ="text-3xl bg-red-300 h-[6vh] w-full flex items-center justify-center"> Amial is built to make it easy and frictionless for people to connect in real lifethrough everyday activities. </div>
+          <h2>The problem</h2>
+          <p>
+            You see people out doing things and think, “I want to do something today too,” but then
+            the idea dies before it even starts. Reaching out feels awkward, uncertain, and harder
+            than it should be.
+          </p>
+
+          <ul className="problem-list">
+            <li>I do not want it to be awkward.</li>
+            <li>I do not know if we are compatible.</li>
+            <li>I do not know if they even want to be approached.</li>
+            <li>I do not know how to reach out.</li>
+            <li>I do not want to be rejected.</li>
+          </ul>
+
+          <h2>Why Amial?</h2>
+
+          <p>
+            Even though we are more connected than ever online, many people still feel lonely and
+            disconnected in real life. Most platforms push users toward dating apps or events planned
+            far ahead. There is still no simple, natural way to go from “I want to do something” to
+            “I am doing something with someone today.”
+          </p>
 
         </div>     
     )

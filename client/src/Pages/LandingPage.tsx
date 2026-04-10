@@ -17,10 +17,11 @@ function Waitlist(){
 function Toolbar() {
   const links = [
     ["Home", "/"],
-    ["Resources", "#"],
+    ["Activity", "/activities"],
     ["Contact", "/messages"],
     ["Sign in", "/login"],
     ["Mission", "/mission"],
+    ["Playback", "/playback"],
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
