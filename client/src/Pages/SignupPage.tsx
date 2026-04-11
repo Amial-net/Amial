@@ -9,10 +9,10 @@ export default function SignupPage() {
     )
 }
 
-function enterButton(email:string, password:string){
-    console.log("Button clicked");
-    console.log(email);
-    console.log(password);
+async function enterButton(email:string, password:string, username:string){
+    // try{
+    //     console.log(email);
+    // } 
 }
 
 function Signup(){
@@ -29,7 +29,7 @@ function Signup(){
         }
 
         setError("");
-        enterButton(email, password);
+        enterButton(email, password, username);
     }
 
     return(
