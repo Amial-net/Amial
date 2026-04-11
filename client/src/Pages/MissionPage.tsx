@@ -38,7 +38,7 @@ function Mission(){
           <h1 className="py-10 text-black flex items-center justify-center max-w-4xl mx-auto text-[100%]"> Amial - Let's do life together </h1>
           <div className ="text-3xl bg-red-300 h-[6vh] w-full flex items-center justify-center"> Amial is built to make it easy and frictionless for people to connect in real lifethrough everyday activities. </div>
           <div className ="text-center">
-            <h2>The problem</h2>
+            <h2>The problem </h2>
             <p>
               You see people out doing things and think, “I want to do something today too,” but then
               the idea dies before it even starts. Reaching out feels awkward, uncertain, and harder
