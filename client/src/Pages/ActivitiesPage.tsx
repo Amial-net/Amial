@@ -134,13 +134,13 @@ function ActivityCard({
           </div>
         </div>
 
-        <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+        <span className="text-xs font-medium px-5 py-1 rounded-full bg-gray-100 text-gray-600">
           {type}
         </span>
       </div>
 
       <div className="mt-4">
-        <p className="text-sm text-gray-700 leading-6">{content}</p>
+        <p className="text-sm text-gray-800 leading-6">{content}</p>
       </div>
 
       <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-6 text-gray-500">
@@ -171,6 +171,86 @@ function FilterPanel() {
   return <></>;
 }
 
+type Event = {
+  title: string;
+  date: string;
+  time: string;
+  host: string;
+};
+
 function UpcomingPanel() {
-  return <></>;
+  const upcomingEvents: Event[] = [
+    {
+      title: "UI Workshop",
+      date: "Apr 5, 2026",
+      time: "3:00 PM - 5:00 PM",
+      host: "Design Team",
+    },
+    {
+      title: "Product Launch",
+      date: "Apr 10, 2026",
+      time: "12:00 PM - 1:00 PM",
+      host: "Marketing",
+    },
+    {
+      title: "Weekly Sync",
+      date: "Apr 7, 2026",
+      time: "10:00 AM - 11:00 AM",
+      host: "Engineering",
+    },
+  ];
+
+  return (
+    <section className="bg-white border border-gray-200 rounded-2xl p-4 space-y-4">
+      <PanelHeader title="Upcoming Events" />
+      <div className="space-y-3">
+        {upcomingEvents.map((event, index) => (
+          <EventCard key={index} event={event} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+type PanelHeaderProps = {
+  title: string;
+};
+
+function PanelHeader({ title }: PanelHeaderProps) {
+  return (
+    <div className="flex items-center justify-between">
+      <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
+      <button className="text-xs font-medium text-gray-500 hover:text-black transition-colors">
+        View all
+      </button>
+    </div>
+  );
+}
+
+type EventCardProps = {
+  event: Event;
+};
+
+function EventCard({ event }: EventCardProps) {
+  const { title, date, time, host } = event;
+
+  return (
+    <article className="border border-gray-200 rounded-xl p-4 hover:bg-gray-50 hover:shadow-sm transition-all cursor-pointer">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold text-gray-900 truncate">
+            {title}
+          </h3>
+          <p className="mt-1 text-xs text-gray-500">
+            {date} · {time}
+          </p>
+          <p className="mt-2 text-xs text-gray-400">Hosted by {host}</p>
+        </div>
+
+        <div className="shrink-0 px-2 py-1 rounded-lg bg-gray-100 text-[11px] font-medium text-gray-600">
+          Event
+        </div>
+      </div>
+    </article>
+  );
 }
