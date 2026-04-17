@@ -6,6 +6,7 @@ export default function LandingPage() {
     <div>
       <Toolbar />
       <HeroImage />
+      <Why/>
     </div>
   );
 }
@@ -47,6 +48,46 @@ function HeroImage() {
         Join the Waitlist
        
       </button>
+    </div>
+  );
+}
+
+function Why(){
+  const items = [
+    {
+      title: "Title",
+      desc: "Body text"
+    },{
+      title: "Title",
+      desc: "Body text"
+    },{
+      title: "Title",
+      desc: "Body text"
+    },{
+      title: "Title",
+      desc: "Body text"
+    },{
+      title: "Title",
+      desc: "Body text"
+    },{
+      title: "Title",
+      desc: "Body text"
+    }
+  ]
+
+  return(
+    <div className="mx-30">
+        <div className="text-5xl">Why Amial?</div>
+
+        <div className ="grid lg:grid-cols-3 gap-y-10">
+          {items.map((item,i) => (
+            <div key={i} className="flex flex-col gap-1">
+              <h3 className="text-3xl font-bold">{item.title}</h3>
+              <p className="">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
     </div>
   );
 }
