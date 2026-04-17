@@ -9,6 +9,7 @@ export default function SignupPage() {
   );
 }
 
+<<<<<<< HEAD
 function Signup() {
   const [email, setEmail] = useState("");
   const [display, setDisplay] = useState("");
@@ -17,10 +18,18 @@ function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+=======
+async function enterButton(email:string, password:string, username:string){
+    // try{
+    //     console.log(email);
+    // } 
+}
+>>>>>>> 23abcc527dcb80e34f2a33602f90b5437ef86804
 
   async function handleSignup() {
     setError("");
 
+<<<<<<< HEAD
     // Quick client-side check (backend validates too)
     if (!email.includes("@rpi.edu")) {
       setError("Invalid email. Must use school email.");
@@ -29,6 +38,16 @@ function Signup() {
     if (!username || !password) {
       setError("All fields are required.");
       return;
+=======
+    function checkingValid(){
+        if(!email.includes("@rpi.edu")){
+            setError("Invaild email. Must use school email.");
+            return;
+        }
+
+        setError("");
+        enterButton(email, password, username);
+>>>>>>> 23abcc527dcb80e34f2a33602f90b5437ef86804
     }
 
     setLoading(true);
