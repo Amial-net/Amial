@@ -167,8 +167,118 @@ function ActivityCard({
   );
 }
 
+type FilterOption = {
+  label: string;
+  value: string;
+};
+
+type FilterSectionData = {
+  title: string;
+  options: FilterOption[];
+};
+
 function FilterPanel() {
-  return <></>;
+  const sections: FilterSectionData[] = [];
+
+  return (
+    <>
+      <FilterPanelHeader title="Filters" />
+      <FilterSectionList sections={sections} />
+      <FilterPanelActions />
+    </>
+  );
+}
+
+type FilterPanelHeaderProps = {
+  title: string;
+};
+
+function FilterPanelHeader({ title }: FilterPanelHeaderProps) {
+  return null;
+}
+
+type FilterSectionListProps = {
+  sections: FilterSectionData[];
+};
+
+function FilterSectionList({ sections }: FilterSectionListProps) {
+  return (
+    <>
+      {sections.map((section) => (
+        <FilterSection
+          key={section.title}
+          title={section.title}
+          options={section.options}
+        />
+      ))}
+    </>
+  );
+}
+
+type FilterSectionProps = {
+  title: string;
+  options: FilterOption[];
+};
+
+function FilterSection({ title, options }: FilterSectionProps) {
+  return (
+    <>
+      <FilterSectionTitle title={title} />
+      <FilterOptionGroup options={options} />
+    </>
+  );
+}
+
+type FilterSectionTitleProps = {
+  title: string;
+};
+
+function FilterSectionTitle({ title }: FilterSectionTitleProps) {
+  return null;
+}
+
+type FilterOptionGroupProps = {
+  options: FilterOption[];
+};
+
+function FilterOptionGroup({ options }: FilterOptionGroupProps) {
+  return (
+    <>
+      {options.map((option) => (
+        <FilterOptionItem
+          key={option.value}
+          label={option.label}
+          value={option.value}
+        />
+      ))}
+    </>
+  );
+}
+
+type FilterOptionItemProps = {
+  label: string;
+  value: string;
+};
+
+function FilterOptionItem({ label, value }: FilterOptionItemProps) {
+  return null;
+}
+
+function FilterPanelActions() {
+  return (
+    <>
+      <ClearFiltersButton />
+      <ApplyFiltersButton />
+    </>
+  );
+}
+
+function ClearFiltersButton() {
+  return null;
+}
+
+function ApplyFiltersButton() {
+  return null;
 }
 
 type Event = {
