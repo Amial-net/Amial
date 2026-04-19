@@ -7,6 +7,7 @@ import ActivityPage from "../Pages/ActivitiesPage";
 import MissionPage from "../Pages/MissionPage";
 import SignupPage from "../Pages/SignupPage";
 import PlaybackPage from "../Pages/PlaybackPage";
+import ProfilePage from "../Pages/ProfilePage";
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
       {
         path: "playback",
         element: <PlaybackPage/>
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />
       }
     ],
   },
