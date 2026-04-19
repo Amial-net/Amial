@@ -1,5 +1,7 @@
 import { Home, Bell, MessageCircle, Calendar, User } from "lucide-react";
 
+import mypfp from "../assets/mypfp.jpg";
+
 export default function SideBar() {
   const buttons = [
     { name: "Amial", icon: User },
@@ -10,7 +12,7 @@ export default function SideBar() {
   ];
 
   return (
-    <aside className="w-72 bg-white border-r border-gray-200 flex flex-col justify-between p-4">
+    <aside className="w-full h-screen bg-white border-r border-gray-200 flex flex-col justify-between p-4">
       <div className="space-y-1">
         {
           // Rendering navbar buttons
@@ -26,14 +28,19 @@ export default function SideBar() {
 }
 
 function NavButton({ name, Icon }: { name: string; Icon: React.ElementType }) {
+  const href = name === "Home" ? "/" : "#";
+
   return (
-    <button className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors text-gray-700 hover:text-black">
+    <a
+      href={href}
+      className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors text-gray-700 hover:text-black"
+    >
       <Icon size={20} />
       <h3 className="text-sm font-medium">{name}</h3>
-    </button>
+    </a>
   );
 }
-
+    
 function ProfileCard({
   displayName,
   username,
@@ -45,7 +52,7 @@ function ProfileCard({
     <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
       <div className="flex items-center gap-3">
         <img
-          src="https://i.pravatar.cc/100"
+          src={mypfp}
           alt="Profile"
           className="w-10 h-10 rounded-full object-cover border border-gray-300"
         />
