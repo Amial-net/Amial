@@ -281,7 +281,11 @@ function FilterPanelActions() {
 }
 
 function ClearFiltersButton() {
-  return null;
+  return (
+    <button className="flex-1 px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-black transition-colors">
+      Clear
+    </button>
+  );
 }
 
 function ApplyFiltersButton() {
