@@ -130,3 +130,122 @@ router.post("/conversations", async (req, res) => {
     });
   }
 });
+
+// ──────────────────────────────────────────────
+// GET /messages/:conversationId
+// Get all messages in a conversation
+// Query: ?page=1&limit=50
+// ──────────────────────────────────────────────
+router.get("/:conversationId", async (req, res) => {
+  try {
+    const userId = req.session.user.id;
+    const { conversationId } = req.params;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const skip = (page - 1) * limit;
+ 
+    // Verify the user is a participant in this conversation
+    const conversation = await Conversation.findOne({
+      _id: conversationId,
+      participants: userId,
+    });
+ 
+    if (!conversation) {
+      return res.status(404).json({
+        success: false,
+        message: "Conversation not found.",
+      });
+    }
+ 
+    const messages = await Message.find({ conversation: conversationId })
+      .populate("sender", "username")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+ 
+    const total = await Message.countDocuments({
+      conversation: conversationId,
+    });
+ 
+    return res.status(200).json({
+      success: true,
+      messages: messages.reverse(), // oldest first for display
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit),
+      },
+    });
+  } catch (err) {
+    console.error("Get messages error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error fetching messages.",
+    });
+  }
+});
+ 
+// ──────────────────────────────────────────────
+// POST /messages/:conversationId
+// Send a message in a conversation
+// Body: { content: "hello!" }
+// ──────────────────────────────────────────────
+router.post("/:conversationId", async (req, res) => {
+  try {
+    const userId = req.session.user.id;
+    const { conversationId } = req.params;
+    const { content } = req.body;
+ 
+    if (!content || !content.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Message content is required.",
+      });
+    }
+ 
+    // Verify the user is a participant
+    const conversation = await Conversation.findOne({
+      _id: conversationId,
+      participants: userId,
+    });
+ 
+    if (!conversation) {
+      return res.status(404).json({
+        success: false,
+        message: "Conversation not found.",
+      });
+    }
+ 
+    const message = await Message.create({
+      conversation: conversationId,
+      sender: userId,
+      content: content.trim(),
+      readBy: [userId], // sender has already "read" their own message
+    });
+ 
+    // Update the conversation's last message
+    conversation.lastMessage = {
+      content: content.trim(),
+      sender: userId,
+      timestamp: new Date(),
+    };
+    await conversation.save();
+ 
+    const populated = await Message.findById(message._id).populate(
+      "sender",
+      "username"
+    );
+ 
+    return res.status(201).json({
+      success: true,
+      message: populated,
+    });
+  } catch (err) {
+    console.error("Send message error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error sending message.",
+    });
+  }
+});
