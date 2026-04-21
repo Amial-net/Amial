@@ -249,3 +249,51 @@ router.post("/:conversationId", async (req, res) => {
     });
   }
 });
+
+// ──────────────────────────────────────────────
+// PATCH /messages/:conversationId/read
+// Mark all messages in a conversation as read
+// ──────────────────────────────────────────────
+router.patch("/:conversationId/read", async (req, res) => {
+  try {
+    const userId = req.session.user.id;
+    const { conversationId } = req.params;
+ 
+    // Verify participation
+    const conversation = await Conversation.findOne({
+      _id: conversationId,
+      participants: userId,
+    });
+ 
+    if (!conversation) {
+      return res.status(404).json({
+        success: false,
+        message: "Conversation not found.",
+      });
+    }
+ 
+    // Add userId to readBy for all messages not yet read by this user
+    await Message.updateMany(
+      {
+        conversation: conversationId,
+        readBy: { $nin: [userId] },
+      },
+      {
+        $addToSet: { readBy: userId },
+      }
+    );
+ 
+    return res.status(200).json({
+      success: true,
+      message: "Messages marked as read.",
+    });
+  } catch (err) {
+    console.error("Mark read error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error marking messages as read.",
+    });
+  }
+});
+ 
+module.exports = router;
