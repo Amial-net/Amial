@@ -129,34 +129,64 @@ function MiddleLayer({
       </div>
     );
   }
+
+  return (
+    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 bg-gray-50">
+      {messages.map((msg) => (
+        <MessageBubble
+          key={msg._id}
+          type={msg.sender._id === currentUserId ? "sent" : "received"}
+          message={msg.content}
+          timestamp={msg.createdAt}
+        />
+      ))}
+      <div ref={bottomRef} />
+    </div>
+  );
+}
   
 function MessageBubble({
   type = "received",
   message,
+  timestamp,
 }: {
   type: string;
   message: string;
+  timestamp: string;
 }) {
   const isSent = type === "sent";
 
+  const time = new Date(timestamp).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <div className={`flex ${isSent ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`
-          max-w-[70%] px-4 py-2.5 rounded-2xl text-sm
-          ${
-            isSent
-              ? "bg-blue-600 text-white rounded-br-md"
-              : "bg-white text-gray-800 border border-gray-200 rounded-bl-md"
-          }
-        `}
-      >
-        {message}
+      <div>
+        <div
+          className={`
+            max-w-[70%] px-4 py-2.5 rounded-2xl text-sm
+            ${
+              isSent
+                ? "bg-blue-600 text-white rounded-br-md"
+                : "bg-white text-gray-800 border border-gray-200 rounded-bl-md"
+            }
+          `}
+        >
+          {message}
+        </div>
+        <p
+          className={`text-xs text-gray-400 mt-1 ${
+            isSent ? "text-right" : "text-left"
+          }`}
+        >
+          {time}
+        </p>
       </div>
     </div>
   );
 }
-
 function MessageInputContainer() {
   return (
     <div className="bg-white border-t border-gray-200 px-6 py-3">
