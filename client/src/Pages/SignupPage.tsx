@@ -4,20 +4,10 @@ import { Link, useNavigate } from "react-router";
 export default function SignupPage() {
   return (
     <div>
-      <Signup />
+      <Toolbar/>
+      <Signup/>
     </div>
   );
-    return (
-        <div className="">
-            <Signup/>
-        </div>
-    )
-}
-
-async function enterButton(email:string, password:string, username:string){
-    // try{
-    //     console.log(email);
-    // } 
 }
 
 function Signup() {
@@ -40,8 +30,6 @@ function Signup() {
     if (!username || !password) {
       setError("All fields are required.");
       return;
-        setError("");
-        enterButton(email, password, username);
     }
 
     setLoading(true);
@@ -110,6 +98,30 @@ function Signup() {
           <span className="text-blue-600"> here</span>
         </Link>
       </div>
+    </div>
+  );
+}
+
+function Toolbar() {
+  const links = [
+    ["Home", "/"],
+    ["Activity", "/activities"],
+    ["Contact", "/messages"],
+    ["Sign in", "/login"],
+    ["Mission", "/mission"],
+    ["Playback", "/playback"],
+  ];
+  return (
+    <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
+      <div className="rounded-full ml-auto bg-[url(/amial-logo.png)] bg-no-repeat bg-center bg-contain"></div>
+      <div className="flex-auto" />
+      {links.map((i) => {
+        return (
+          <a href={i[1]} className="p-5" key={i[0]}>
+            {i[0]}
+          </a>
+        );
+      })}
     </div>
   );
 }
