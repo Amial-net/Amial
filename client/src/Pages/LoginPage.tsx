@@ -1,7 +1,105 @@
-import {useState} from "react";
-import {Link} from "react-router"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 export default function LoginPage() {
+  return (
+    <div>
+      <Login />
+    </div>
+  );
+}
+
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleLogin() {
+    setError("");
+    if (!email || !password) {
+      setError("Email/username and password are required.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // sends session cookie
+        body: JSON.stringify({ identifier: email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Login failed.");
+        return;
+      }
+
+      // Login succeeded — backend sent a verification email
+      // Navigate to a page that tells them to check their email
+      navigate("/verify");
+    } catch (err) {
+      setError("Could not connect to server.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="bg-black min-h-screen bg-no-repeat bg-cover bg-center">
+      <h1 className="text-7xl underline font-bold text-white flex flex-col items-center gap-1 align-center">
+        Amial
+      </h1>
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        <div className="bg-white h-[90%] min-h-[40vh] min-w-[70vh] max-w-xs w-full border rounded-[10%] flex flex-col items-center gap-1 align-center content-center justify-center">
+          <div className="text-center text-3xl font-bold">Login</div>
+
+          {error && <p className="text-red-500 px-4 text-center">{error}</p>}
+
+          <div className="text-1xl text-left w-full pl-[5%]">Email or Username</div>
+          <div className="text-left w-full pl-[5%]">
+            <input
+              type="text"
+              placeholder="Email or Username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="text-1xl"
+            />
+          </div>
+
+          <div className="text-1xl text-left w-full pl-[5%]">Password</div>
+          <div className="flex text-left w-full pl-[5%]">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="text-1xl"
+            />
+            <button
+              className="ml-auto bg-[url(/show-password-icon.png)] bg-no-repeat bg-center bg-contain pl-[5%] text-white hover:bg-slate-600"
+              onClick={() => setShowPassword((prev) => !prev)}
+            />
+          </div>
+
+          <button
+            className="px-[40%] bg-black text-white hover:bg-slate-600 flex items-center active:bg-blue-600"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? "..." : "Enter"}
+          </button>
+
+          <p>Don't have an account?</p>
+          <Link to="/signup">
+            <span>Sign up</span>
+            <span className="text-blue-600"> here</span>
+          </Link>
     return (
         <div className="">
             <Toolbar/>
@@ -82,5 +180,7 @@ function Login(){
                 </div>
             </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
