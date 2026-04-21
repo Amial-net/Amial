@@ -55,3 +55,78 @@ router.get("/conversations", async (req, res) => {
     });
   }
 });
+
+// ──────────────────────────────────────────────
+// POST /messages/conversations
+// Start a new conversation with another user
+// Body: { recipientUsername: "someuser" }
+// ──────────────────────────────────────────────
+router.post("/conversations", async (req, res) => {
+  try {
+    const userId = req.session.user.id;
+    const { recipientUsername } = req.body;
+ 
+    if (!recipientUsername) {
+      return res.status(400).json({
+        success: false,
+        message: "Recipient username is required.",
+      });
+    }
+ 
+    const recipient = await User.findOne({
+      username: recipientUsername.trim().toLowerCase(),
+    });
+ 
+    if (!recipient) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+ 
+    if (recipient._id.toString() === userId) {
+      return res.status(400).json({
+        success: false,
+        message: "You cannot message yourself.",
+      });
+    }
+ 
+    // Check if a conversation already exists between these two users
+    const existing = await Conversation.findOne({
+      participants: { $all: [userId, recipient._id], $size: 2 },
+    }).populate("participants", "username email");
+ 
+    if (existing) {
+      return res.status(200).json({
+        success: true,
+        conversation: existing,
+        message: "Conversation already exists.",
+      });
+    }
+ 
+    const newConvo = await Conversation.create({
+      participants: [userId, recipient._id],
+      lastMessage: {
+        content: "",
+        sender: userId,
+        timestamp: new Date(),
+      },
+    });
+ 
+    const populated = await Conversation.findById(newConvo._id).populate(
+      "participants",
+      "username email"
+    );
+ 
+    return res.status(201).json({
+      success: true,
+      conversation: populated,
+    });
+  } catch (err) {
+    console.error("Create conversation error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error creating conversation.",
+    });
+  }
+});
