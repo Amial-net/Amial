@@ -194,7 +194,14 @@ type FilterPanelHeaderProps = {
 };
 
 function FilterPanelHeader({ title }: FilterPanelHeaderProps) {
-  return null;
+  return (
+    <div className="flex items-center justify-between">
+      <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
+      <button className="text-xs font-medium text-gray-500 hover:text-black transition-colors">
+        Reset
+      </button>
+    </div>
+  );
 }
 
 type FilterSectionListProps = {
@@ -274,7 +281,11 @@ function FilterPanelActions() {
 }
 
 function ClearFiltersButton() {
-  return null;
+  return (
+    <button className="flex-1 px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-black transition-colors">
+      Clear
+    </button>
+  );
 }
 
 function ApplyFiltersButton() {
