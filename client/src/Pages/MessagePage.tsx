@@ -83,19 +83,15 @@ function MainChatArea({
 }
 
 
-function ConversationTopBar() {
+function ConversationTopBar({ username }: { username: string }) {
   return (
     <div className="h-[72px] bg-white border-b border-gray-200 px-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <img
-          src="https://i.pravatar.cc/100?img=12"
-          alt="User"
-          className="w-10 h-10 rounded-full object-cover"
-        />
-
+        <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold text-sm">
+          {username.slice(0, 2).toUpperCase()}
+        </div>
         <div>
-          <h2 className="text-sm font-semibold text-gray-900">Vincent Wang</h2>
-          <p className="text-xs text-green-500">Online</p>
+          <h2 className="text-sm font-semibold text-gray-900">{username}</h2>
         </div>
       </div>
 
@@ -103,7 +99,6 @@ function ConversationTopBar() {
         <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
           <Phone size={18} className="text-gray-600" />
         </button>
-
         <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
           <Video size={18} className="text-gray-600" />
         </button>
@@ -112,14 +107,29 @@ function ConversationTopBar() {
   );
 }
 
-function MiddleLayer() {
-  return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 bg-gray-50">
-      <MessageBubble type="received" message="Hello, kind gentleman" />
-      <MessageBubble type="sent" message="hi?" />
-    </div>
-  );
-}
+function MiddleLayer({
+  messages,
+  currentUserId,
+}: {
+  messages: Message[];
+  currentUserId: string;
+}) {
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  if (messages.length === 0) {
+    return (
+      <div className="flex-1 flex items-center justify-center bg-gray-50">
+        <p className="text-gray-400 text-sm">
+          No messages yet. Say something!
+        </p>
+      </div>
+    );
+  }
+  
 function MessageBubble({
   type = "received",
   message,
