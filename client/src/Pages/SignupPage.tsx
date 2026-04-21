@@ -7,6 +7,17 @@ export default function SignupPage() {
       <Signup />
     </div>
   );
+    return (
+        <div className="">
+            <Signup/>
+        </div>
+    )
+}
+
+async function enterButton(email:string, password:string, username:string){
+    // try{
+    //     console.log(email);
+    // } 
 }
 
 function Signup() {
@@ -29,6 +40,8 @@ function Signup() {
     if (!username || !password) {
       setError("All fields are required.");
       return;
+        setError("");
+        enterButton(email, password, username);
     }
 
     setLoading(true);
