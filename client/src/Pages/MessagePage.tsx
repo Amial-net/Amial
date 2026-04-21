@@ -1,6 +1,38 @@
 import SideBar from "../components/SideBar";
 
 import { Search, CheckCheck, Phone, Video } from "lucide-react";
+//Set up for conversation CORS
+const API = "http://localhost:3000";
+
+// ─── Types ───────────────────────────────────
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+}
+
+interface LastMessage {
+  content: string;
+  sender: string | { _id: string; username: string };
+  timestamp: string;
+}
+
+interface Conversation {
+  _id: string;
+  participants: User[];
+  lastMessage: LastMessage;
+  unreadCount: number;
+  updatedAt: string;
+}
+
+interface Message {
+  _id: string;
+  conversation: string;
+  sender: { _id: string; username: string };
+  content: string;
+  readBy: string[];
+  createdAt: string;
+}
 
 export default function MessagePage() {
   return (
@@ -12,15 +44,44 @@ export default function MessagePage() {
   );
 }
 
-function MainChatArea() {
+function MainChatArea({
+  conversation,
+  messages,
+  currentUserId,
+  onSend,
+}: {
+  conversation: Conversation | null;
+  messages: Message[];
+  currentUserId: string;
+  onSend: (content: string) => void;
+}) {
+  if (!conversation) {
+    return (
+      <main className="flex-1 flex items-center justify-center h-screen bg-gray-50">
+        <div className="text-center text-gray-400">
+          <p className="text-xl font-semibold">No conversation selected</p>
+          <p className="text-sm mt-2">
+            Pick a conversation from the sidebar or start a new one.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  // Find the other participant to display their name
+  const otherUser = conversation.participants.find(
+    (p) => p._id !== currentUserId
+  );
+
   return (
     <main className="flex-1 flex flex-col h-screen overflow-hidden">
-      <ConversationTopBar />
-      <MiddleLayer />
-      <MessageInputContainer />
+      <ConversationTopBar username={otherUser?.username || "Unknown"} />
+      <MiddleLayer messages={messages} currentUserId={currentUserId} />
+      <MessageInputContainer onSend={onSend} />
     </main>
   );
 }
+
 
 function ConversationTopBar() {
   return (
