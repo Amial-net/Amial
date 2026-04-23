@@ -117,7 +117,7 @@ function Toolbar() {
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
-      <div>Amial</div>
+      <div className="rounded-full ml-auto bg-[url(/amial-logo.png)] bg-no-repeat bg-center bg-contain"></div>
       <div className="flex-auto" />
       {links.map((i) => {
         return (

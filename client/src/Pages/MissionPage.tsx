@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router";
+
 export default function MissionPage(){
     return (
         <div className = "">
@@ -19,7 +21,7 @@ function Toolbar() {
   ];
   return (
     <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
-      <div>Amial</div>
+      <div className="rounded-full ml-auto bg-[url(/amial-logo.png)] bg-no-repeat bg-center bg-contain"></div>
       <div className="flex-auto" />
       {links.map((i) => {
         return (
@@ -36,17 +38,18 @@ function Mission(){
     return(
         <div>
           <h1 className="text-5xl py-10 font-bold text-black flex items-center justify-center max-w-4xl mx-auto"> Amial - Let's do life together </h1>
-          <div className ="text-3xl bg-red-300 h-[6vh] w-full flex items-center justify-center"> Amial is built to make it easy and frictionless for people to connect in real lifethrough everyday activities. </div>
+          <div className ="text-3xl bg-red-300 h-[6vh] w-full flex items-center justify-center"> Amial is built to make it easy and frictionless for people to connect in real life through everyday activities. </div>
           <div className ="text-center">
             <h2 className="text-2xl font-bold">The problem </h2>
             <p>
               You see people out doing things and think, “I want to do something today too,” but then
-              the idea dies before it even starts. Reaching out feels awkward, uncertain, and harder
-              than it should be.
+              the idea dies before it even starts. 
             </p>
 
+            <p> Reaching out feels awkward, uncertain, and harder than it should be.</p>
+
             <ul className="problem-list">
-              <li>I do not want it to be awkward.</li>
+              <li><br/>I do not want it to be awkward.</li>
               <li>I do not know if we are compatible.</li>
               <li>I do not know if they even want to be approached.</li>
               <li>I do not know how to reach out.</li>
@@ -57,9 +60,10 @@ function Mission(){
 
             <p>
               Even though we are more connected than ever online, many people still feel lonely and
-              disconnected in real life. Most platforms push users toward dating apps or events planned
-              far ahead.
+              disconnected in real life. 
             </p>
+
+            <p>Most platforms push users toward dating apps or events planned far ahead.</p>
 
             <p>
               There is still no simple, natural way to go from “I want to do something” to
@@ -92,7 +96,14 @@ function Mission(){
               interest.
             </p>
 
-            <div><br/>Let's be connected One activity at a time</div>
+            <div className="text-2xl"><br/>
+              <div>Let's be connected One activity at a time</div>
+              <span>Click </span>
+              <Link to="/signup" className="">
+                <span className="text-blue-600">here</span>
+              </Link>
+              <span> to get started!</span>
+            </div>
         </div>
       </div>     
     )
