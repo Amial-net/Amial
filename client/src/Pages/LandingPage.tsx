@@ -28,6 +28,24 @@ const features = [
   },
 ];
 
+const steps = [
+  {
+    num: "01",
+    title: "Create your profile",
+    desc: "Tell us what you're into — activities, schedule, and what kind of friends you're looking for.",
+  },
+  {
+    num: "02",
+    title: "Discover activities",
+    desc: "Browse local events and hangouts, or post your own. Coffee, hiking, game nights — you pick.",
+  },
+  {
+    num: "03",
+    title: "Match & meet up",
+    desc: "Connect with people who said yes to the same thing. No pressure, just good company.",
+  },
+];
+
 export default function LandingPage() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -163,6 +181,39 @@ function HeroImage({ onOpen }) {
             e.currentTarget.nextSibling.style.display = "flex";
           }}
         />
+      </div>
+    </div>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <div className="bg-[#1A2640] py-24 px-12">
+      <div className="max-w-[1000px] mx-auto">
+        <p className="text-[12px] tracking-[3px] uppercase text-[#B8D0F0] font-medium mb-3 text-center">
+          Simple by design
+        </p>
+        <h2 className="font-['Playfair_Display',serif] text-[clamp(30px,4vw,46px)] font-bold text-[#F0F6FF] tracking-[-1px] text-center mb-16">
+          How it works
+        </h2>
+        <div className="grid grid-cols-3 gap-8">
+          {steps.map((s) => (
+            <div
+              key={s.num}
+              className="text-center px-6 py-8 rounded-2xl border border-[rgba(184,208,240,0.12)] bg-[rgba(255,255,255,0.04)]"
+            >
+              <div className="font-['Playfair_Display',serif] text-[48px] font-bold text-[#5B8FD4] opacity-60 leading-none mb-4">
+                {s.num}
+              </div>
+              <h3 className="text-[18px] font-medium text-[#F0F6FF] mb-3">
+                {s.title}
+              </h3>
+              <p className="text-sm text-[rgba(184,208,240,0.65)] leading-[1.7]">
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
