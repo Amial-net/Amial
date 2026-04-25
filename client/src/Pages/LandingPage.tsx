@@ -86,17 +86,57 @@ function Toolbar({ onOpen }) {
   );
 }
 
-function HeroImage({ onOpen }: { onOpen: () => void }) {
+function HeroImage({ onOpen }) {
   return (
-    <div className="bg-[url(/hero.png)] bg-no-repeat bg-cover bg-center gap-8 max-w-full h-[80vh] flex flex-col items-center justify-center text-black text-shadow-lg text-shadow-zinc-500 font-black">
-      <div className="text-9xl text-center">Amial</div>
-      <div className="text-5xl">Meet new people in your free time</div>
-      <button
-        className="mt-3 text-3xl px-6 py-2 bg-zinc-200 rounded-sm dark:bg-zinc-800 dark:text-white"
-        onClick={onOpen}
-      >
-        Join the Waitlist
-      </button>
+    <div className="min-h-[90vh] bg-[linear-gradient(150deg,#0F1E38_0%,#1A3360_45%,#2A5080_100%)] flex items-center justify-between px-24 relative overflow-hidden gap-12">
+      {/* Subtle radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_50%,rgba(91,143,212,0.18)_0%,transparent_70%)] pointer-events-none" />
+
+      {/* Left: text content */}
+      <div className="flex-none max-w-[520px] z-10">
+        <p className="text-[13px] tracking-[3px] uppercase text-[#B8D0F0] font-medium mb-6">
+          Where friendships begin
+        </p>
+        <h1 className="font-['Playfair_Display',serif] text-[clamp(52px,7vw,84px)] font-bold text-[#F0F6FF] leading-[1.05] mb-5 tracking-[-2px]">
+          Make friends
+          <br />
+          who <span className="text-[#5B8FD4]">get you.</span>
+        </h1>
+        <p className="text-[clamp(15px,2vw,18px)] font-light text-[rgba(220,232,255,0.75)] leading-[1.7] mb-10 max-w-[420px]">
+          Amial matches you with real people nearby based on what you actually
+          want to do — no profiles to swipe, no awkward intros.
+        </p>
+        <div className="flex gap-3 flex-wrap">
+          <button
+            onClick={onOpen}
+            className="bg-[#5B8FD4] text-white border-none text-[15px] font-medium px-9 py-[14px] rounded-full cursor-pointer font-[DM_Sans,sans-serif]"
+          >
+            Join the waitlist
+          </button>
+          <a
+            href="/activities"
+            className="text-[#B8D0F0] text-[15px] font-normal px-6 py-[14px] rounded-full border border-[rgba(184,208,240,0.3)] no-underline inline-flex items-center gap-[6px]"
+          >
+            Browse activities →
+          </a>
+        </div>
+        <p className="text-[12px] text-[rgba(220,232,255,0.35)] mt-4">
+          No spam. Just your spot in line.
+        </p>
+      </div>
+
+      {/* Right: anime art slot */}
+      <div className="flex-none w-[clamp(280px,35vw,480px)] h-[clamp(360px,55vh,620px)] relative z-10">
+        <img
+          src="/moremore.png"
+          alt="Amial character"
+          className="w-full h-full object-contain object-bottom [filter:drop-shadow(0_0_40px_rgba(91,143,212,0.35))]"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+            e.currentTarget.nextSibling.style.display = "flex";
+          }}
+        />
+      </div>
     </div>
   );
 }
