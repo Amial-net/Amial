@@ -244,3 +244,39 @@ function Why() {
     </div>
   );
 }
+
+function Testimonials() {
+  return (
+    <div className="bg-[#E8EFF9] py-24 px-12">
+      <div className="max-w-[1100px] mx-auto">
+        <p className="text-[12px] tracking-[3px] uppercase text-[#5B8FD4] font-medium mb-3 text-center">
+          Early users
+        </p>
+        <h2 className="font-['Playfair_Display',serif] text-[clamp(30px,4vw,46px)] font-bold text-[#1A2640] tracking-[-1px] text-center mb-14">
+          Real friendships, real stories
+        </h2>
+        <div className="grid grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="bg-[#F8FAFF] rounded-2xl p-8 border border-[rgba(26,38,64,0.1)]"
+            >
+              <p className="text-[15px] text-[#1A2640] leading-[1.7] mb-6 italic">
+                "{t.text}"
+              </p>
+              <div className="flex items-center gap-[10px]">
+                <div className="w-[38px] h-[38px] rounded-full bg-[#B8D0F0] flex items-center justify-center text-sm font-medium text-[#3A6BB5]">
+                  {t.name[0]}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-[#1A2640]">{t.name}</p>
+                  <p className="text-[12px] text-[#6A7D9A]">{t.location}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
