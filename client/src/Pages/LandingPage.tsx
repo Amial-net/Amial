@@ -1,6 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router";
 
+const features = [
+  {
+    title: "Activity-first matching",
+    desc: "Get matched based on what you actually want to do — hikes, coffee, board games, gigs. Not just profiles.",
+  },
+  {
+    title: "No awkward swiping",
+    desc: "Amial is not a dating app. Connections are mutual, opt-in, and built around shared activities.",
+  },
+  {
+    title: "Local and real",
+    desc: "Every connection is someone in your city. Meet people you can actually hang out with in real life.",
+  },
+  {
+    title: "Free to join",
+    desc: "No paywalls to meet people. Amial is free to use — always has been, always will be.",
+  },
+  {
+    title: "Safety first",
+    desc: "Verified profiles, community reports, and optional group meetups so you always feel comfortable.",
+  },
+  {
+    title: "Your schedule, your vibe",
+    desc: "Set your availability and interests. Amial finds people who fit your life — not the other way around.",
+  },
+];
+
 export default function LandingPage() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -142,42 +169,24 @@ function HeroImage({ onOpen }) {
 }
 
 function Why() {
-  const items = [
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-    {
-      title: "Title",
-      desc: "Body text",
-    },
-  ];
-
   return (
-    <div className="mx-30">
-      <div className="text-5xl">Why Amial?</div>
-
-      <div className="grid lg:grid-cols-3 gap-y-10">
-        {items.map((item, i) => (
-          <div key={i} className="flex flex-col gap-1">
-            <h3 className="text-3xl font-bold">{item.title}</h3>
-            <p className="">{item.desc}</p>
+    <div className="py-24 px-12 max-w-[1100px] mx-auto">
+      <p className="text-[12px] tracking-[3px] uppercase text-[#5B8FD4] font-medium mb-3">
+        The case for Amial
+      </p>
+      <h2 className="font-['Playfair_Display',serif] text-[clamp(34px,5vw,52px)] font-bold text-[#1A2640] tracking-[-1px] mb-14">
+        Why Amial?
+      </h2>
+      <div className="grid grid-cols-3 gap-[1.5px] border-[1.5px] border-[rgba(26,38,64,0.1)] rounded-2xl overflow-hidden bg-[rgba(26,38,64,0.1)]">
+        {features.map((item, i) => (
+          <div key={i} className="bg-[#F8FAFF] p-8 pr-7">
+            <div className="font-['Playfair_Display',serif] text-[42px] font-bold text-[#B8D0F0] leading-none mb-3">
+              0{i + 1}
+            </div>
+            <h3 className="text-[17px] font-medium mb-2 text-[#1A2640]">
+              {item.title}
+            </h3>
+            <p className="text-sm text-[#6A7D9A] leading-[1.65]">{item.desc}</p>
           </div>
         ))}
       </div>
