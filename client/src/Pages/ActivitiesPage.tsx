@@ -241,7 +241,11 @@ type FilterSectionTitleProps = {
 };
 
 function FilterSectionTitle({ title }: FilterSectionTitleProps) {
-  return null;
+  return (
+    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+      {title}
+    </h3>
+  );
 }
 
 type FilterOptionGroupProps = {
