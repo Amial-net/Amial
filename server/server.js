@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const { connectDB } = require("./scripts/seed");
+// const { connectDB } = require("./scripts/seed"); //will use this late but current dont have a seed
 const authRoutes = require("./routes/UserRoutes");
 
 const app = express();
-port = 3000;
+const port = 3000;
 
 app.use(
   cors({
@@ -13,16 +13,6 @@ app.use(
     credentials: true,
   })
 );
-
-connectDB()
-    .then(() => {
-        app.listen(port, () =>{
-            console.log(`Listening on port ${port}`);
-        });
-    })
-    .catch((err) =>{
-        console.error("Database connection failed. Server not started.", err);
-    })
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,34 +34,17 @@ app.use(
 app.use("/auth", authRoutes);
 
 
+// connectDB()
+//     .then(() => {
+//         app.listen(port, () =>{
+//             console.log(`Listening on port ${port}`);
+//         });
+//     })
+//     .catch((err) =>{
+//         console.error("Database connection failed. Server not started.", err);
+//     })
 
-
-    
-
-
-
-    
-
-
-
-const express = require("express");
-const cors = require("cors");
-const session = require("express-session");
-const { connectDB } = require("./scripts/seed")
-
-const app = express()
-port = 3000;
-
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-connectDB()
-    .then(() => {
-        app.listen(port, () =>{
-            console.log(`Listening on port ${port}`);
-        });
-    })
-    .catch((err) =>{
-        console.error("Database connection failed. Server not started.", err);
-    })
+//temp
+app.listen(port, () =>{
+  console.log(`Listening on port ${port}`);
+});
