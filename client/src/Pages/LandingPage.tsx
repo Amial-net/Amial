@@ -2,17 +2,40 @@ import {useState} from "react";
 import {Link} from "react-router";
 
 export default function LandingPage() {
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [email, setEmail] = useState("");
+  
   return (
     <div>
       <Toolbar />
-      <HeroImage />
+      <HeroImage onOpen={() => setShowPopUp(true)}/>
       <Why/>
+
+      {showPopUp && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg text-center">
+            <h2 className="text-2xl mb-4">Join the Waitlist</h2>
+            <h2 className="text-2xl mb-4">
+              <input
+                type="text"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="text-1xl"
+              />
+            </h2>
+
+            <button
+              onClick={() => setShowPopUp(false)}
+              className="bg-gray-300 px-4 py-2 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
-
-function Waitlist(){
-  console.log("waitlist");
 }
 
 function Toolbar() {
@@ -39,14 +62,13 @@ function Toolbar() {
   );
 }
 
-function HeroImage() {
+function HeroImage({onOpen}: {onOpen:() => void}) {
   return (
     <div className="bg-[url(/hero.png)] bg-no-repeat bg-cover bg-center gap-8 max-w-full h-[80vh] flex flex-col items-center justify-center text-black text-shadow-lg text-shadow-zinc-500 font-black">
       <div className="text-9xl text-center">Amial</div>
       <div className="text-5xl">Meet new people in your free time</div>
-      <button className="mt-3 text-3xl px-6 py-2 bg-zinc-200 rounded-sm dark:bg-zinc-800 dark:text-white" onClick={() => Waitlist()}>
+      <button className="mt-3 text-3xl px-6 py-2 bg-zinc-200 rounded-sm dark:bg-zinc-800 dark:text-white" onClick={onOpen}>
         Join the Waitlist
-       
       </button>
     </div>
   );
