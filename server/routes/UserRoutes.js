@@ -52,16 +52,17 @@ const setVerificationTokenOnUser = async (user) => {
 // SIGN UP
 router.post("/signup", async (req, res) => {
   try {
-    let { email, username, password } = req.body;
+    let { email, username, password, display } = req.body;
 
     email = email?.trim().toLowerCase();
     username = username?.trim().toLowerCase();
     password = password?.trim();
+    display = display?.trim();
 
-    if (!email || !username || !password) {
+    if (!email || !username || !password || !display) {
       return res.status(400).json({
         success: false,
-        message: "Email, username, and password are required.",
+        message: "Email, username, password, and display are required.",
       });
     }
 
@@ -112,6 +113,7 @@ router.post("/signup", async (req, res) => {
       email,
       username,
       password: hashedPassword,
+      display,
     });
 
     //stores user in a session (For cookie session later to identify who is in the current session to stay logged in)
@@ -119,6 +121,7 @@ router.post("/signup", async (req, res) => {
       id: newUser._id,
       email: newUser.email,
       username: newUser.username,
+      display: newUser.display,
     };
         
     req.session.emailVerified = false;
@@ -134,6 +137,7 @@ router.post("/signup", async (req, res) => {
         id: newUser._id,
         email: newUser.email,
         username: newUser.username,
+        display: newUser.display,
       },
     });
   } catch (err) {
@@ -183,6 +187,7 @@ router.post("/login", async (req, res) => {
       id: user._id,
       email: user.email,
       username: user.username,
+      display: user.display,
     };
 
     req.session.emailVerified = false;
@@ -230,6 +235,7 @@ router.get("/verify-email/:token", async (req, res) => {
       id: user._id,
       email: user.email,
       username: user.username,
+      display: user.display,
     };
 
     req.session.emailVerified = true;
