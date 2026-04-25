@@ -67,32 +67,66 @@ const steps = [
 export default function LandingPage() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div>
-      <Toolbar />
+    <div className="bg-[#F0F4FB] font-[DM_Sans,sans-serif] text-[#1A2640]">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet"
+      />
+      <Toolbar onOpen={() => setShowPopUp(true)} />
       <HeroImage onOpen={() => setShowPopUp(true)} />
+      <HowItWorks />
       <Why />
+      <Testimonials />
+      <CallToAction onOpen={() => setShowPopUp(true)} />
+      <Footer />
 
       {showPopUp && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg text-center">
-            <h2 className="text-2xl mb-4">Join the Waitlist</h2>
-            <h2 className="text-2xl mb-4">
-              <input
-                type="text"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="text-1xl"
-              />
+        <div
+          onClick={(e) => e.target === e.currentTarget && setShowPopUp(false)}
+          className="fixed inset-0 bg-[rgba(10,20,45,0.65)] backdrop-blur-sm flex items-center justify-center z-[200]"
+        >
+          <div className="bg-[#F8FAFF] rounded-[20px] p-10 w-[380px] max-w-[90vw] text-center border border-[rgba(26,38,64,0.1)]">
+            <div className="w-[52px] h-[52px] rounded-full bg-[#DDE9F8] mx-auto mb-5 flex items-center justify-center text-[22px]">
+              ✉
+            </div>
+            <h2 className="font-['Playfair_Display',serif] text-[26px] font-bold text-[#1A2640] mb-2">
+              Join the waitlist
             </h2>
-
+            <p className="text-sm text-[#6A7D9A] mb-7 leading-relaxed">
+              Be the first to know when Amial launches in your city.
+            </p>
+            {submitted ? (
+              <p className="text-[#5B8FD4] font-medium py-4">
+                🎉 You're on the list! We'll be in touch.
+              </p>
+            ) : (
+              <>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-[10px] border-[1.5px] border-[rgba(26,38,64,0.1)] text-[15px] text-[#1A2640] bg-[#F0F4FB] outline-none mb-3 font-[DM_Sans,sans-serif]"
+                />
+                <button
+                  onClick={() => email && setSubmitted(true)}
+                  className="w-full py-3 bg-[#5B8FD4] text-white border-none rounded-[10px] text-[15px] font-medium cursor-pointer mb-3 font-[DM_Sans,sans-serif]"
+                >
+                  Reserve my spot
+                </button>
+              </>
+            )}
             <button
-              onClick={() => setShowPopUp(false)}
-              className="bg-gray-300 px-4 py-2 rounded"
+              onClick={() => {
+                setShowPopUp(false);
+                setSubmitted(false);
+              }}
+              className="bg-transparent border-none text-[13px] text-[#6A7D9A] cursor-pointer underline underline-offset-[3px] font-[DM_Sans,sans-serif]"
             >
-              Close
+              No thanks
             </button>
           </div>
         </div>
@@ -321,4 +355,8 @@ function CallToAction({ onOpen }) {
       </button>
     </div>
   );
+}
+
+function Footer() {
+  return null;
 }
