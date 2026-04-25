@@ -1,4 +1,5 @@
 import MainSideBar from "../components/SideBar.tsx";
+import Calendar from "../components/Calendar";
 
 export default function CalendarPage() {
   return (
@@ -23,7 +24,7 @@ export default function CalendarPage() {
         {/* CALENDAR BODY */}
         <div className="p-4">
           <div className="rounded-[18px] border border-black/10 p-5">
-            Calendar goes here
+            <Calendar />
           </div>
         </div>
 
