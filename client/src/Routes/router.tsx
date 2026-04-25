@@ -8,6 +8,7 @@ import MissionPage from "../Pages/MissionPage";
 import SignupPage from "../Pages/SignupPage";
 import PlaybackPage from "../Pages/PlaybackPage";
 import ProfilePage from "../Pages/ProfilePage";
+import CalendarPage from "../Pages/CalendarPage";
 
 const routes = [
   {
@@ -45,6 +46,10 @@ const routes = [
       {
         path: "profile",
         element: <ProfilePage />
+      },
+      {
+        path: "calendar",
+        element: <CalendarPage />
       }
     ],
   },
