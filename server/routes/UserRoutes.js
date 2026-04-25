@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const User = require("../models/Users");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendVerificationEmail(email, token) {
-  const verificationLink = `http://localhost: 3000/auth/verify-email/${token}`;
+  const verificationLink = `http://localhost:3000/auth/verify-email/${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
@@ -34,6 +34,7 @@ async function sendVerificationEmail(email, token) {
   });
 }
 
+//every login needs a new verification token
 const setVerificationTokenOnUser = async (user) => {
   const rawToken = crypto.randomBytes(32).toString("hex");
   const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
