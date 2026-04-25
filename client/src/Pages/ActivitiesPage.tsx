@@ -271,8 +271,16 @@ type FilterOptionItemProps = {
   value: string;
 };
 
-function FilterOptionItem({ label, value }: FilterOptionItemProps) {
-  return null;
+function FilterOptionItem({ label }: FilterOptionItemProps) {
+  return (
+    <label className="flex items-center gap-3 text-sm text-gray-700 cursor-pointer group">
+      <input
+        type="checkbox"
+        className="w-4 h-4 rounded-md border-gray-300 text-gray-900 focus:ring-gray-900"
+      />
+      <span className="group-hover:text-black transition-colors">{label}</span>
+    </label>
+  );
 }
 
 function FilterPanelActions() {
