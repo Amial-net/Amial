@@ -28,6 +28,24 @@ const features = [
   },
 ];
 
+const testimonials = [
+  {
+    name: "Jordan M.",
+    location: "Brooklyn, NY",
+    text: "I moved to a new city and had zero friends. Within two weeks on Amial I had a hiking group and a weekly board game night.",
+  },
+  {
+    name: "Priya S.",
+    location: "Austin, TX",
+    text: "Finally an app that's not trying to be a dating app. Just genuine people wanting to hang out.",
+  },
+  {
+    name: "Leo K.",
+    location: "Seattle, WA",
+    text: "The activity-first approach is genius. We already had something to talk about before we even met.",
+  },
+];
+
 const steps = [
   {
     num: "01",
@@ -277,6 +295,30 @@ function Testimonials() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function CallToAction({ onOpen }) {
+  return (
+    <div className="bg-[linear-gradient(135deg,#1A2640_0%,#2A4070_100%)] py-28 px-12 text-center">
+      <p className="text-[13px] tracking-[3px] uppercase text-[#B8D0F0] font-medium mb-6">
+        Don't wait
+      </p>
+      <h2 className="font-['Playfair_Display',serif] text-[clamp(34px,5vw,58px)] font-bold text-[#F0F6FF] tracking-[-1.5px] mb-5">
+        Your next great friendship
+        <br />
+        starts here.
+      </h2>
+      <p className="text-[17px] text-[rgba(220,232,255,0.65)] mb-10 font-light">
+        Join thousands on the waitlist. Launching soon.
+      </p>
+      <button
+        onClick={onOpen}
+        className="bg-[#5B8FD4] text-white border-none text-[16px] font-medium px-11 py-4 rounded-full cursor-pointer font-[DM_Sans,sans-serif]"
+      >
+        Get early access
+      </button>
     </div>
   );
 }
