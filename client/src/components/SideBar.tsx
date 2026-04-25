@@ -12,7 +12,7 @@ export default function SideBar() {
   ];
 
   return (
-    <aside className="w-full h-screen bg-white border-r border-gray-200 flex flex-col justify-between p-4">
+    <aside className="w-xs h-screen bg-white border-r border-gray-200 flex flex-col justify-between p-4">
       <div className="space-y-1">
         {
           // Rendering navbar buttons
@@ -40,7 +40,7 @@ function NavButton({ name, Icon }: { name: string; Icon: React.ElementType }) {
     </a>
   );
 }
-    
+
 function ProfileCard({
   displayName,
   username,
