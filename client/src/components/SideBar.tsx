@@ -1,8 +1,9 @@
 import { Home, Bell, MessageCircle, Calendar, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import mypfp from "../assets/mypfp.jpg";
 
-export default function SideBar() {
+export default function SideBar({ onPost }: { onPost?: () => void }) {
   const buttons = [
     { name: "Amial", icon: User },
     { name: "Home", icon: Home },
@@ -14,30 +15,42 @@ export default function SideBar() {
   return (
     <aside className="w-xs h-screen bg-white border-r border-gray-200 flex flex-col justify-between p-4">
       <div className="space-y-1">
-        {
-          // Rendering navbar buttons
-          buttons.map(({ name, icon: Icon }) => (
-            <NavButton key={name} name={name} Icon={Icon} />
-          ))
-        }
+        {buttons.map(({ name, icon: Icon }) => (
+          <NavButton key={name} name={name} Icon={Icon} />
+        ))}
       </div>
 
-      <ProfileCard displayName="Richard Wei" username="VinceTheKing" />
+      <div className="space-y-4">
+        <button
+          onClick={onPost}
+          className="w-full rounded-2xl bg-black hover:bg-neutral-800 active:scale-[0.98] transition-all duration-150 px-6 py-3.5 text-[15px] font-bold text-white tracking-wide"
+        >
+          Post
+        </button>
+
+        <ProfileCard displayName="Richard Wei" username="VinceTheKing" />
+      </div>
     </aside>
   );
 }
 
 function NavButton({ name, Icon }: { name: string; Icon: React.ElementType }) {
-  const href = name === "Home" ? "/" : "#";
+  const href =
+    name === "Home" ? "/" :
+    name === "Calendar" ? "/calendar" :
+    name === "Chat" ? "/messages" :
+    name === "Notifications" ? "/notifications" :
+    name === "Amial" ? "/playback" :
+    "#";
 
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors text-gray-700 hover:text-black"
     >
       <Icon size={20} />
       <h3 className="text-sm font-medium">{name}</h3>
-    </a>
+    </Link>
   );
 }
 

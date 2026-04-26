@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
+import { EventsProvider } from './assets/context/EventsContext'
 
 function App() {
-
   return (
-    <>
-        <Outlet />
-    </>
+    <EventsProvider>
+      <Outlet />
+    </EventsProvider>
   )
 }
 
