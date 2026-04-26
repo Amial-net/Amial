@@ -70,7 +70,14 @@ export default function MissionPage() {
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return null;
+  return (
+    <p
+      className="text-xs font-medium tracking-widest uppercase mb-3"
+      style={{ color: C.accent, letterSpacing: "0.2em" }}
+    >
+      {children}
+    </p>
+  );
 }
 
 function SectionHeading({
@@ -80,7 +87,19 @@ function SectionHeading({
   children: React.ReactNode;
   light?: boolean;
 }) {
-  return null;
+  return (
+    <h2
+      className="font-bold mb-8"
+      style={{
+        fontFamily: "'Playfair Display', serif",
+        fontSize: "clamp(28px, 4vw, 44px)",
+        color: light ? "#F0F6FF" : C.dark,
+        letterSpacing: "-1px",
+      }}
+    >
+      {children}
+    </h2>
+  );
 }
 
 function MissionHero() {
@@ -172,11 +191,58 @@ function TheProblem() {
 }
 
 function WhyAmial() {
-  return null;
+  return (
+    <div className="px-6 py-24" style={{ background: C.altBg }}>
+      <div className="max-w-3xl mx-auto">
+        <SectionLabel>Why Amial</SectionLabel>
+        <SectionHeading>
+          More connected online,{<br />}lonelier in real life.
+        </SectionHeading>
+        <div className="flex flex-col gap-5">
+          {whyPoints.map((text, i) => (
+            <div key={i} className="flex gap-4 items-start">
+              <div
+                className="shrink-0 w-2 h-2 rounded-full"
+                style={{ background: C.accent, marginTop: 8 }}
+              />
+              <p
+                className="text-base leading-relaxed"
+                style={{ color: C.muted }}
+              >
+                {text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
-
 function MissionStatement() {
-  return null;
+  return (
+    <div className="px-6 py-24 text-center" style={{ background: C.dark }}>
+      <div className="max-w-2xl mx-auto">
+        <p
+          className="text-xs font-medium tracking-widest uppercase mb-5"
+          style={{ color: C.accentLight, letterSpacing: "0.2em" }}
+        >
+          Our mission
+        </p>
+        <p
+          className="font-bold leading-snug"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(26px, 4vw, 42px)",
+            color: "#F0F6FF",
+            letterSpacing: "-1px",
+          }}
+        >
+          To make it easy for people to do daily activities together and create
+          real connections through shared experiences.
+        </p>
+      </div>
+    </div>
+  );
 }
 
 function HowItWorks() {
