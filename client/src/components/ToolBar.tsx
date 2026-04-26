@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function ToolBar({ onOpen }) {
   const links = [
@@ -18,7 +18,7 @@ export default function ToolBar({ onOpen }) {
         <img
           src="/amial-logo.png"
           alt="Amial logo"
-          className="w-[100px] h-[100px] object-contain"
+          className="w-[100px] h-[100px] object-contain transition-transform duration-300 hover:scale-105"
           onError={(e) => {
             e.currentTarget.style.display = "none";
             e.currentTarget.nextSibling.style.display = "flex";
@@ -33,17 +33,18 @@ export default function ToolBar({ onOpen }) {
       </div>
 
       {links.map(([label, href]) => (
-        <a
+        <Link
           key={label}
-          href={href}
-          className="text-[rgba(255,255,255,0.65)] text-sm no-underline px-[14px] h-[60px] flex items-center"
+          to={href}
+          className="relative text-[rgba(255,255,255,0.65)] text-sm no-underline px-[14px] h-[60px] flex items-center transition-all duration-300 hover:text-white hover:-translate-y-[2px] after:content-[''] after:absolute after:left-3 after:bottom-3 after:w-0 after:h-[2px] after:bg-[#B8D0F0] after:transition-all after:duration-300 hover:after:w-[calc(100%-24px)]"
         >
           {label}
-        </a>
+        </Link>
       ))}
+
       <button
         onClick={() => navigate("/signup")}
-        className="text-[#B8D0F0] text-sm font-medium border border-[rgba(184,208,240,0.35)] rounded-md px-4 h-9 ml-2 bg-transparent cursor-pointer font-[DM_Sans,sans-serif]"
+        className="text-[#B8D0F0] text-sm font-medium border border-[rgba(184,208,240,0.35)] rounded-md px-4 h-9 ml-2 bg-transparent cursor-pointer font-[DM_Sans,sans-serif] transition-all duration-300 hover:bg-[#B8D0F0] hover:text-[#1A2640] hover:shadow-md hover:-translate-y-[1px]"
       >
         Sign Up
       </button>
