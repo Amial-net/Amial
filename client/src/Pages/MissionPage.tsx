@@ -246,9 +246,100 @@ function MissionStatement() {
 }
 
 function HowItWorks() {
-  return null;
+  return (
+    <div className="px-6 py-24" style={{ background: C.bg }}>
+      <div className="max-w-4xl mx-auto">
+        <SectionLabel>How it works</SectionLabel>
+        <SectionHeading>Three steps to a real hangout.</SectionHeading>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {steps.map((s) => (
+            <div
+              key={s.num}
+              className="rounded-2xl p-7"
+              style={{
+                background: C.cardBg,
+                border: `1.5px solid ${C.border}`,
+              }}
+            >
+              <div
+                className="font-bold mb-4"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: 44,
+                  color: C.accentLight,
+                  lineHeight: 1,
+                }}
+              >
+                {s.num}
+              </div>
+              <h3
+                className="font-medium mb-2 text-lg"
+                style={{ color: C.dark }}
+              >
+                {s.title}
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function MissionCTA() {
-  return null;
+  return (
+    <div
+      className="px-6 py-24 text-center"
+      style={{
+        background: "linear-gradient(135deg, #1A2640 0%, #2A4070 100%)",
+      }}
+    >
+      <div className="max-w-xl mx-auto">
+        <p
+          className="text-xs font-medium tracking-widest uppercase mb-5"
+          style={{ color: C.accentLight, letterSpacing: "0.2em" }}
+        >
+          Ready?
+        </p>
+        <h2
+          className="font-bold mb-4"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(30px, 5vw, 52px)",
+            color: "#F0F6FF",
+            letterSpacing: "-1px",
+          }}
+        >
+          One activity at a time.
+        </h2>
+        <p
+          className="mb-10 font-light"
+          style={{
+            color: "rgba(220,232,255,0.65)",
+            fontSize: 17,
+            lineHeight: 1.6,
+          }}
+        >
+          Your next great friendship is one post away.
+        </p>
+        <Link
+          to="/signup"
+          className="inline-block font-medium"
+          style={{
+            background: C.accent,
+            color: "#fff",
+            fontSize: 15,
+            padding: "14px 40px",
+            borderRadius: 50,
+            textDecoration: "none",
+          }}
+        >
+          Get started →
+        </Link>
+      </div>
+    </div>
+  );
 }
