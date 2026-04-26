@@ -1,32 +1,7 @@
-import { useState } from "react";
 import MainSideBar from "../components/SideBar.tsx";
-import Calendar, { CalendarEvent } from "../components/Calendar";
+import Calendar, { type CalendarEvent } from "../components/Calendar";
+import { useEvents } from "../assets/context/EventsContext";
 
-// ─── Default seed events (mirror the initialPosts from PlaybackPage) ───
-const DEFAULT_EVENTS: CalendarEvent[] = [
-  {
-    id: 1,
-    title: "Training Legs!",
-    date: "2026-04-25",
-    time: "6pm",
-    location: "RPI Mueller",
-    tags: ["Chill", "Legs", "Low-Key"],
-    attendees: 3,
-    source: "joined",
-  },
-  {
-    id: 2,
-    title: "Watching Anime",
-    date: "2026-04-28",
-    time: "10pm",
-    location: "DCC 308",
-    tags: ["fun", "Relaxing"],
-    attendees: 3,
-    source: "joined",
-  },
-];
-
-// ─── Tag colour map (shared with PlaybackPage) ─────────────────────────
 const TAG_COLORS: Record<string, string> = {
   Chill: "bg-sky-100 text-sky-600",
   Study: "bg-violet-100 text-violet-600",
@@ -34,6 +9,7 @@ const TAG_COLORS: Record<string, string> = {
   Food: "bg-amber-100 text-amber-600",
   Anime: "bg-pink-100 text-pink-600",
   Fun: "bg-green-100 text-green-600",
+  fun: "bg-green-100 text-green-600",
   Relaxing: "bg-teal-100 text-teal-600",
   "Low-Key": "bg-gray-100 text-gray-500",
   Social: "bg-indigo-100 text-indigo-600",
@@ -44,7 +20,7 @@ function tagColor(tag: string) {
   return TAG_COLORS[tag] ?? "bg-[#5f8dee]/10 text-[#5f8dee]";
 }
 
-// ─── helpers ──────────────────────────────────────────────────────────
+
 function formatDateLabel(dateStr: string): string {
   if (!dateStr) return "";
   const d = new Date(dateStr + "T00:00:00");
@@ -62,7 +38,7 @@ function isToday(event: CalendarEvent): boolean {
   return event.date === new Date().toISOString().slice(0, 10);
 }
 
-// ─── EventCard (right sidebar) ────────────────────────────────────────
+
 function EventCard({ event }: { event: CalendarEvent }) {
   const accent = event.source === "created" ? "#5f8dee" : "#34c48b";
   const label = event.source === "created" ? "Created" : "Joined";
@@ -97,9 +73,9 @@ function EventCard({ event }: { event: CalendarEvent }) {
   );
 }
 
-// ─── CalendarPage ─────────────────────────────────────────────────────
+
 export default function CalendarPage() {
-  const [events] = useState<CalendarEvent[]>(DEFAULT_EVENTS);
+  const { events } = useEvents(); // ← pulls live events from context
 
   const todayEvents = events.filter(isToday);
   const upcomingEvents = events.filter((e) => isUpcoming(e) && !isToday(e));
@@ -124,7 +100,6 @@ export default function CalendarPage() {
                 Your joined and created activities, all in one place.
               </p>
             </div>
-            {/* Legend */}
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#5f8dee] inline-block" />
@@ -184,7 +159,7 @@ export default function CalendarPage() {
           )}
         </div>
 
-        {/* Stats strip */}
+        {/* Stats */}
         <div className="rounded-2xl border border-black/[0.07] bg-white shadow-sm p-4">
           <h3 className="text-[15px] font-extrabold mb-3">Your Activity</h3>
           <div className="grid grid-cols-2 gap-2">

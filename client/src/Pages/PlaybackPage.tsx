@@ -2,6 +2,7 @@ import { useState } from "react";
 import MainSideBar from "../components/SideBar.tsx";
 import mypfp from "../assets/mypfp.jpg";
 import animeGirl from "../assets/anime-girl.gif";
+import { useEvents } from "../assets/context/EventsContext"; 
 
 export default function PlaybackPage() {
   return (
@@ -62,10 +63,22 @@ const initialPosts: Post[] = [
 function Playback() {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [showModal, setShowModal] = useState(false);
+  const { addEvent } = useEvents();                      
 
   const handleNewPost = (post: Post) => {
     setPosts([post, ...posts]);
     setShowModal(false);
+    //  also push to calendar as a "created" event
+    addEvent({
+      id: post.id,
+      title: post.title,
+      date: post.date,
+      time: post.time,
+      location: post.location,
+      tags: post.tags,
+      attendees: post.attendees,
+      source: "created",
+    });
   };
 
   return (
@@ -112,6 +125,22 @@ function CenterFeed({ posts }: { posts: Post[] }) {
 }
 
 function PostCard({ post }: { post: Post }) {
+  const { joinedIds, toggleJoin } = useEvents();         
+  const joined = joinedIds.has(post.id);                 
+
+  const handleJoin = () => {                            
+    toggleJoin(post.id, {
+      id: post.id,
+      title: post.title,
+      date: post.date,
+      time: post.time,
+      location: post.location,
+      tags: post.tags,
+      attendees: post.attendees,
+      source: "joined",
+    });
+  };
+
   return (
     <div className="rounded-2xl border border-black/[0.07] bg-white shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
       <div className="flex items-start justify-between">
@@ -161,8 +190,16 @@ function PostCard({ post }: { post: Post }) {
               <img key={i} src={mypfp} className="h-7 w-7 rounded-full border-2 border-white object-cover" alt="attendee" />
             ))}
           </div>
-          <button className="rounded-full bg-[#5f8dee] hover:bg-[#4a7de0] transition-colors px-5 py-1.5 text-[13px] font-bold text-white">
-            JOIN
+          {/*button now toggles join state */}
+          <button
+            onClick={handleJoin}
+            className={`rounded-full transition-colors px-5 py-1.5 text-[13px] font-bold text-white ${
+              joined
+                ? "bg-[#34c48b] hover:bg-[#2aad7a]"
+                : "bg-[#5f8dee] hover:bg-[#4a7de0]"
+            }`}
+          >
+            {joined ? "JOINED ✓" : "JOIN"}
           </button>
         </div>
       </div>

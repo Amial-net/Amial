@@ -1,10 +1,11 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
 
 export type CalendarEvent = {
   id: number;
   title: string;
-  date: string;       // "YYYY-MM-DD"
-  time: string;       // e.g. "6pm" or "10pm"
+  date: string;
+  time: string;
   location: string;
   tags: string[];
   attendees: number;
