@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import ToolBar from "../components/ToolBar";
 
 export default function LoginPage() {
   return (
     <div>
-      <Toolbar/>
-      <Login/>
+      <ToolBar />
+      <Login />
     </div>
   );
 }
@@ -62,7 +63,9 @@ function Login() {
 
           {error && <p className="text-red-500 px-4 text-center">{error}</p>}
 
-          <div className="text-1xl text-left w-full pl-[5%]">Email or Username</div>
+          <div className="text-1xl text-left w-full pl-[5%]">
+            Email or Username
+          </div>
           <div className="text-left w-full pl-[5%]">
             <input
               type="text"
@@ -101,10 +104,11 @@ function Login() {
             <span>Sign up</span>
             <span className="text-blue-600"> here</span>
           </Link>
+        </div>
       </div>
     </div>
-    </div>
-)}
+  );
+}
 
 function Toolbar() {
   const links = [

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ToolBar({ onOpen }) {
   const links = [
     ["Home", "/"],
@@ -5,7 +7,10 @@ export default function ToolBar({ onOpen }) {
     ["Contact", "/messages"],
     ["Mission", "/mission"],
     ["Playback", "/playback"],
+    ["Log In", "/login"],
   ];
+  const navigate = useNavigate();
+
   return (
     <nav className="bg-[#1A2640] flex items-center pr-8 h-[60px] sticky top-0 z-[100]">
       {/* Logo + wordmark */}
@@ -37,10 +42,10 @@ export default function ToolBar({ onOpen }) {
         </a>
       ))}
       <button
-        onClick={onOpen}
+        onClick={() => navigate("/signup")}
         className="text-[#B8D0F0] text-sm font-medium border border-[rgba(184,208,240,0.35)] rounded-md px-4 h-9 ml-2 bg-transparent cursor-pointer font-[DM_Sans,sans-serif]"
       >
-        Join waitlist
+        Sign Up
       </button>
     </nav>
   );

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import ToolBar from "../components/ToolBar";
 
 export default function SignupPage() {
   return (
     <div>
-      <Toolbar/>
-      <Signup/>
+      <ToolBar />
+      <Signup />
     </div>
   );
 }
@@ -69,19 +70,43 @@ function Signup() {
 
         <div className="text-1xl text-left w-full pl-[5%]">RPI Email</div>
         <div className="text-left w-full pl-[5%]">
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="text-1xl" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="text-1xl"
+          />
         </div>
         <div className="text-1xl text-left w-full pl-[5%]">Display Name</div>
         <div className="text-left w-full pl-[5%]">
-          <input type="text" placeholder="Display" value={display} onChange={(e) => setDisplay(e.target.value)} className="text-1xl" />
+          <input
+            type="text"
+            placeholder="Display"
+            value={display}
+            onChange={(e) => setDisplay(e.target.value)}
+            className="text-1xl"
+          />
         </div>
         <div className="text-1xl text-left w-full pl-[5%]">Username</div>
         <div className="text-left w-full pl-[5%]">
-          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="text-1xl" />
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="text-1xl"
+          />
         </div>
         <div className="text-1xl text-left w-full pl-[5%]">Password</div>
         <div className="text-left w-full pl-[5%]">
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="text-1xl" />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="text-1xl"
+          />
         </div>
 
         <button
@@ -98,30 +123,6 @@ function Signup() {
           <span className="text-blue-600"> here</span>
         </Link>
       </div>
-    </div>
-  );
-}
-
-function Toolbar() {
-  const links = [
-    ["Home", "/"],
-    ["Activity", "/activities"],
-    ["Contact", "/messages"],
-    ["Sign in", "/login"],
-    ["Mission", "/mission"],
-    ["Playback", "/playback"],
-  ];
-  return (
-    <div className="max-w-full flex [&>div]:p-5 bg-black text-white">
-      <div className="rounded-full ml-auto bg-[url(/amial-logo.png)] bg-no-repeat bg-center bg-contain"></div>
-      <div className="flex-auto" />
-      {links.map((i) => {
-        return (
-          <a href={i[1]} className="p-5" key={i[0]}>
-            {i[0]}
-          </a>
-        );
-      })}
     </div>
   );
 }
