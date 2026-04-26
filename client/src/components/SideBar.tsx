@@ -1,4 +1,5 @@
 import { Home, Bell, MessageCircle, Calendar, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import mypfp from "../assets/mypfp.jpg";
 
@@ -34,16 +35,22 @@ export default function SideBar({ onPost }: { onPost?: () => void }) {
 }
 
 function NavButton({ name, Icon }: { name: string; Icon: React.ElementType }) {
-  const href = name === "Home" ? "/" : "#";
+  const href =
+    name === "Home" ? "/" :
+    name === "Calendar" ? "/calendar" :
+    name === "Chat" ? "/messages" :
+    name === "Notifications" ? "/notifications" :
+    name === "Amial" ? "/playback" :
+    "#";
 
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors text-gray-700 hover:text-black"
     >
       <Icon size={20} />
       <h3 className="text-sm font-medium">{name}</h3>
-    </a>
+    </Link>
   );
 }
 
